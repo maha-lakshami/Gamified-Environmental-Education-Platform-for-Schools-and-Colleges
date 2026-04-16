@@ -1,0 +1,83 @@
+.page-header h1 {
+    font-size: 32px;
+    margin-bottom: 5px;
+}
+
+.page-header p {
+    color: #666;
+    margin-bottom: 30px;
+}
+
+/* STAT CARDS */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.stat-card {
+    padding: 20px;
+    border-radius: 10px;
+    background: #f9f9f9;
+}
+
+.light-yellow { background: #fff6e5; }
+.light-green  { background: #e9f9ef; }
+.light-blue   { background: #eaf3fc; }
+.light-purple { background: #f4ecfb; }
+
+.stat-card h4 {
+    font-size: 14px;
+    color: #555;
+}
+
+.stat-card h2 {
+    font-size: 26px;
+    margin-top: 10px;
+}
+
+/* MAIN GRID */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 25px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+.category-list li,
+.activity-list li,
+.top-students li {
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.actions .btn {
+    display: block;
+    padding: 12px;
+    margin-bottom: 10px;
+    text-align: center;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.green { background: #2ecc71; }
+.purple { background: #8e44ad; }
+.blue { background: #3498db; }
+.dark-blue { background: #2c3e50; }
+
+*{
+    background-color: transparent;
+}
+
+body{
+   background:white;
+}

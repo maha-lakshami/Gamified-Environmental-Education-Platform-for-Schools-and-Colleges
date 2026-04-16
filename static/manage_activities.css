@@ -1,0 +1,29 @@
+.verification-table{
+width:100%;
+background:white;
+border-radius:12px;
+padding:20px;
+}
+
+.verification-table th,
+.verification-table td{
+padding:14px;
+border-bottom:1px solid #eee;
+}
+
+.verify-btn{
+background:#22c55e;
+color:white;
+padding:6px 12px;
+border-radius:6px;
+text-decoration:none;
+margin-right:6px;
+}
+
+.reject-btn{
+background:#ef4444;
+color:white;
+padding:6px 12px;
+border-radius:6px;
+text-decoration:none;
+}
