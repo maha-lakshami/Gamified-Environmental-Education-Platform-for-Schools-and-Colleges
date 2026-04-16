@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Quiz Completed 🎉</h2>
+
+<div class="card">
+    <h3>Your Score: {{ score }}</h3>
+</div>
+
+<br>
+
+<h3>Review Answers</h3>
+
+{% for r in results %}
+
+<div class="card">
+
+<p><b>{{ r.question }}</b></p>
+
+<p>Your Answer: {{ r.selected }} ❌</p>
+
+<p>Correct Answer: {{ r.correct }} ✅</p>
+
+</div>
+
+<br>
+
+{% endfor %}
+
+<a href="/dashboard">
+    <button>Back to Dashboard</button>
+</a>
+
+{% endblock %}

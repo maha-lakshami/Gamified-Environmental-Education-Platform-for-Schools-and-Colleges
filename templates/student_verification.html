@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="verification-page">
+
+    <h1>Student Verification</h1>
+    <p>Review and approve student registrations for your school</p>
+
+    <!-- Tabs -->
+    <div class="tabs">
+        <button onclick="showTab('pending', event)" class="tab-btn active">
+            Pending ({{ pending|length }})
+        </button>
+        <button onclick="showTab('verified', event)" class="tab-btn">
+            Verified ({{ verified|length }})
+        </button>
+        <button onclick="showTab('rejected', event)" class="tab-btn">
+            Rejected ({{ rejected|length }})
+        </button>
+    </div>
+
+    <!-- ===================== PENDING ===================== -->
+    <div id="pending" class="tab-content active">
+        {% if pending %}
+            {% for student in pending %}
+            <div class="card">
+
+                <div class="card-left">
+                    <h3>{{ student['fullname'] }}</h3>
+                    <p>{{ student['email'] }}</p>
+                </div>
+
+                <div class="actions">
+    <a href="{{ url_for('approve_submission', id=student['id']) }}" class="approve-btn">
+         Approve
+    </a>
+
+    <a href="{{ url_for('reject_submission', id=student['id']) }}" class="reject-btn">
+         Reject
+    </a>
+    </div>
+
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="empty-box">
+                No pending verifications
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- ===================== VERIFIED ===================== -->
+    <div id="verified" class="tab-content">
+        {% if verified %}
+            {% for student in verified %}
+            <div class="card verified">
+
+                <div class="card-left">
+                    <h3>{{ student['fullname'] }}</h3>
+                    <p>{{ student['email'] }}</p>
+                </div>
+
+                <div class="status green">
+                    Verified
+                </div>
+
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="empty-box">
+                No verified students
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- ===================== REJECTED ===================== -->
+    <div id="rejected" class="tab-content">
+        {% if rejected %}
+            {% for student in rejected %}
+            <div class="card rejected">
+
+                <div class="card-left">
+                    <h3>{{ student['fullname'] }}</h3>
+                    <p>{{ student['email'] }}</p>
+                </div>
+
+                <div class="status red">
+                    Rejected
+                </div>
+
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="empty-box">
+                No rejected students
+            </div>
+        {% endif %}
+    </div>
+
+</div>
+
+<script>
+function showTab(tabName, event) {
+    document.querySelectorAll(".tab-content").forEach(tab => {
+        tab.classList.remove("active");
+    });
+
+    document.querySelectorAll(".tab-btn").forEach(btn => {
+        btn.classList.remove("active");
+    });
+
+    document.getElementById(tabName).classList.add("active");
+    event.target.classList.add("active");
+}
+</script>
+
+{% endblock %}

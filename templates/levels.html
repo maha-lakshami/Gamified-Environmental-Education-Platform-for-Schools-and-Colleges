@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="challenge-header">
+
+    <h1>{{ category_name }} Challenge</h1>
+    <h3>Select Difficulty Level</h3>
+
+</div>
+
+<div class="level-container">
+
+    <a href="/quiz/{{ category_slug }}/easy" class="level-card easy">
+        <h2>Easy</h2>
+        <p>For 5th – 7th Grade Students</p>
+    </a>
+
+    <a href="/quiz/{{ category_slug }}/moderate" class="level-card moderate">
+        <h2>Moderate</h2>
+        <p>For 8th – 10th Grade Students</p>
+    </a>
+
+    <a href="/quiz/{{ category_slug }}/advanced" class="level-card advanced">
+        <h2>Advanced</h2>
+        <p>NCERT / Higher Level Questions</p>
+    </a>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,192 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+body {
+    background: #f4f6f9;
+}
+
+.quiz-box {
+    max-width: 700px;
+    margin: 40px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+}
+
+.quiz-title {
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.timer {
+    text-align: center;
+    color: red;
+    margin: 15px 0;
+}
+
+.question {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.option {
+    display: block;
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+}
+
+.option:hover {
+    background: #f1f1f1;
+}
+
+.next-btn {
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+}
+
+.progress-bar {
+    height: 8px;
+    background: #ddd;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.progress {
+    height: 8px;
+    background: #28a745;
+    border-radius: 5px;
+}
+</style>
+
+<div class="quiz-box">
+
+<h2 class="quiz-title">
+Ecoplay Quiz ({{ qno + 1 }} / {{ total }})
+</h2>
+
+<div class="progress-bar">
+    <div class="progress" style="width: {{ ((qno+1)/total)*100 }}%"></div>
+</div>
+
+<div class="timer">
+⏳ Time left: <span id="timer">10</span>s
+</div>
+
+<form method="POST" id="quizForm">
+
+<div class="question">
+{{ q.question }}
+</div>
+
+<!-- ✅ correct answer -->
+<input type="hidden" id="correct" value="{{ q.correct_answer }}">
+
+<!-- ✅ answer to send -->
+<input type="hidden" name="answer" id="hiddenAnswer">
+
+<!-- OPTIONS -->
+<label class="option" onclick="check(this, '{{ q.option1 }}')">
+    <input type="radio" name="opt"> {{ q.option1 }}
+</label>
+
+<label class="option" onclick="check(this, '{{ q.option2 }}')">
+    <input type="radio" name="opt"> {{ q.option2 }}
+</label>
+
+<label class="option" onclick="check(this, '{{ q.option3 }}')">
+    <input type="radio" name="opt"> {{ q.option3 }}
+</label>
+
+<label class="option" onclick="check(this, '{{ q.option4 }}')">
+    <input type="radio" name="opt"> {{ q.option4 }}
+</label>
+
+<p id="result"></p>
+
+<button type="submit" class="next-btn">Next</button>
+
+</form>
+
+</div>
+
+<script>
+
+// 🔊 SOUND
+function beep(freq){
+    let audio = new AudioContext();
+    let osc = audio.createOscillator();
+    osc.type = "sine";
+    osc.frequency.setValueAtTime(freq, audio.currentTime);
+    osc.connect(audio.destination);
+    osc.start();
+    osc.stop(audio.currentTime + 0.2);
+}
+
+
+// ⏳ TIMER
+let time = 10;
+let timer = document.getElementById("timer");
+
+let countdown = setInterval(() => {
+    time--;
+    timer.innerText = time;
+
+    beep(600);
+
+    if(time <= 0){
+        clearInterval(countdown);
+        document.getElementById("quizForm").submit();
+    }
+}, 1000);
+
+
+// ✅ MAIN FUNCTION
+function check(element, value){
+
+    clearInterval(countdown); // stop timer
+
+    let correct = document.getElementById("correct").value.trim();
+    let result = document.getElementById("result");
+
+    // ✅ store answer
+    document.getElementById("hiddenAnswer").value = value;
+
+    // highlight
+    element.style.background = "#d0e7ff";
+
+    if(value.trim() === correct){
+        result.innerHTML = "✔ Correct!";
+        result.style.color = "green";
+        beep(1200);
+    }
+    else{
+        result.innerHTML = "✘ Wrong!";
+        result.style.color = "red";
+        beep(300);
+    }
+
+    // disable all options
+    document.querySelectorAll(".option").forEach(opt => {
+        opt.style.pointerEvents = "none";
+    });
+
+    // next question
+    setTimeout(() => {
+        document.getElementById("quizForm").submit();
+    }, 1200);
+}
+
+</script>
+
+{% endblock %}

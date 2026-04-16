@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+
+body {
+    background: #f4f6f9;
+}
+
+/* CENTER CARD */
+.challenge-box {
+    max-width: 700px;
+    margin: 50px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+}
+
+/* TITLE */
+.challenge-title {
+    text-align: center;
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* DESCRIPTION */
+.challenge-desc {
+    text-align: center;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+/* TASK CARD */
+.task {
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    transition: 0.3s;
+}
+
+.task:hover {
+    background: #f9f9f9;
+}
+
+/* FILE INPUT */
+input[type="file"] {
+    margin-top: 10px;
+}
+
+/* BUTTON */
+.submit-btn {
+    width: 100%;
+    padding: 12px;
+    background: #28a745;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background: #218838;
+}
+
+</style>
+
+<div class="challenge-box">
+
+    <div class="challenge-title">
+        {{ c.title }}
+    </div>
+
+    <div class="challenge-desc">
+        {{ c.description }}
+    </div>
+
+    <form method="POST" action="/submit_challenge/{{ c.id }}" enctype="multipart/form-data">
+
+        {% for t in tasks %}
+
+        <div class="task">
+            <b>Task {{ loop.index }}:</b> {{ t.task }} <br>
+
+            <input type="file" name="photo{{ t.id }}" required>
+        </div>
+
+        {% endfor %}
+
+        <button type="submit" class="submit-btn">
+            ✅ Submit All Tasks
+        </button>
+
+    </form>
+
+</div>
+
+{% endblock %}

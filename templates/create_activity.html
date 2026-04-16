@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+
+body {
+    background: #f4f6f9;
+}
+
+/* CENTER CARD */
+.activity-box {
+    max-width: 700px;
+    margin: 50px auto;
+    background: white;
+    padding: 35px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+}
+
+/* TITLE */
+.activity-title {
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* SUBTEXT */
+.activity-sub {
+    text-align: center;
+    color: #666;
+    margin-bottom: 25px;
+}
+
+/* INPUTS */
+.activity-box input,
+.activity-box select,
+.activity-box textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 18px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+/* TEXTAREA HEIGHT */
+.activity-box textarea {
+    min-height: 100px;
+}
+
+/* BUTTON */
+.create-btn {
+    width: 100%;
+    padding: 14px;
+    background: #28a745;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.create-btn:hover {
+    background: #218838;
+}
+
+</style>
+
+<div class="activity-box">
+
+    <div class="activity-title">
+        Create Activity
+    </div>
+
+    <div class="activity-sub">
+        Create engaging eco activities for students 🌱
+    </div>
+
+    <form method="POST">
+
+        <input type="text" name="title" placeholder="Title" required>
+
+        <textarea name="description" placeholder="Description" required></textarea>
+        <!-- VIDEO UPLOAD -->
+<label>Upload Experiment Video:</label>
+<input type="file" name="video"><br><br>
+
+<!-- MATERIALS -->
+<textarea name="materials" placeholder="Materials required"></textarea><br><br>
+
+<!-- STEPS -->
+<textarea name="steps" placeholder="Steps (one per line)"></textarea><br><br>
+        
+
+        <select name="category">
+            <option value="Water">Water</option>
+            <option value="Waste">Waste</option>
+            <option value="Energy">Energy</option>
+            <option value="Transportation">Transportation</option>
+            <option value="Biodiversity">Biodiversity</option>
+        </select>
+
+        <input type="number" name="points" placeholder="Points" required>
+
+        <input type="number" name="total_students" placeholder="Total Students" required>
+
+        <select name="difficulty">
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+        </select>
+
+        <select name="status">
+            <option value="draft">Draft</option>
+            <option value="active">Active</option>
+            <option value="completed">Completed</option>
+        </select>
+
+        <input type="date" name="start_date">
+        <input type="date" name="end_date">
+
+        <button type="submit" class="create-btn">
+            🚀 Create Activity
+        </button>
+
+    </form>
+
+</div>
+
+{% endblock %}

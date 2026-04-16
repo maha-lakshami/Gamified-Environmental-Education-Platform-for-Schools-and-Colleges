@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+
+<title>Sign Up</title>
+
+<style>
+
+body{
+    font-family:Arial;
+    background:linear-gradient(to right,#e6f4ea,#f5f7fa);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+.card{
+    background:white;
+    padding:30px;
+    width:380px;
+    border-radius:12px;
+}
+
+input, select{
+    width:100%;
+    padding:12px;
+    margin-bottom:10px;
+    border-radius:6px;
+    border:1px solid #ccc;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    background:#2ecc71;
+    border:none;
+    color:white;
+    border-radius:6px;
+    font-weight:bold;
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="card">
+
+<h2>Sign Up</h2>
+
+<form method="POST">
+
+<input name="fullname" placeholder="Full Name" required>
+
+<input name="email" placeholder="Email" required>
+
+<input name="username" placeholder="Username" required>
+
+<input name="password" type="password" placeholder="Password" required>
+
+<input name="school" placeholder="School / College" required>
+
+<input name="grade" placeholder="Grade / Year" required>
+
+<!-- ✅ ROLE SELECT (CORRECT PLACE) -->
+
+<select name="role" required>
+    <option value="">Select Role</option>
+    <option value="student">Student</option>
+    <option value="teacher">Teacher</option>
+</select>
+
+<button>
+Create Account
+</button>
+
+</form>
+
+</div>
+
+</body>
+</html>

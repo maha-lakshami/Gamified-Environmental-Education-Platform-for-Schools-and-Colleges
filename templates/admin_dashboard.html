@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+
+<!-- TOP NAV -->
+<div class="navbar">
+    <div class="logo">🌿 EcoPlay</div>
+    <div class="nav-links">
+        <a class="active">Dashboard</a>
+        <a>Manage Activities</a>
+        <a>Student Verification</a>
+        <a>NGO Partnerships</a>
+        <a>Reports</a>
+    </div>
+    <div class="profile">🏫 School</div>
+</div>
+
+<!-- MAIN DASHBOARD -->
+<div class="dashboard">
+
+    <!-- STATS -->
+    <div class="stats">
+        <div class="card blue">
+            <h3>👨‍🎓Total Students</h3>
+            <p>{{ stats.students }}</p>
+        </div>
+        <div class="card green">
+            <h3>⚡Active Participants</h3>
+            <p>{{ stats.active }}</p>
+        </div>
+        <div class="card purple">
+            <h3>🎯Challenges Completed</h3>
+            <p>{{ stats.completed }}</p>
+        </div>
+        <div class="card yellow">
+            <h3>🏆Total Points</h3>
+            <p>{{ stats.points }}</p>
+        </div>
+    </div>
+
+    <!-- MIDDLE -->
+    <div class="middle">
+
+        <!-- CATEGORIES -->
+        <div class="box">
+            <h3>Challenge Categories</h3>
+            <ul>
+                <li>Water Conservation</li>
+                <li>Waste Reduction</li>
+                <li>Energy Saving</li>
+                <li>Transportation</li>
+                <li>Biodiversity</li>
+            </ul>
+        </div>
+
+        <!-- TOP STUDENTS -->
+        <div class="box">
+            <h3>Top Students</h3>
+            {% for s in top_students %}
+                <p>🏅 {{ s[0] }} – {{ s[1] }} pts</p>
+            {% endfor %}
+        </div>
+
+    </div>
+
+    <!-- BOTTOM -->
+    <div class="bottom">
+
+        <div class="box">
+            <h3>Recent Activities</h3>
+            <p>📌 2 Students Registered</p>
+            <p>📌 Leaderboard Updated</p>
+        </div>
+
+        <div class="box">
+            <h3>Quick Actions</h3>
+            <button>Create New Challenge</button>
+            <button>Create New Quiz</button>
+            <button>Generate Report</button>
+            <button>View All Students</button>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

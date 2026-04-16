@@ -1,0 +1,198 @@
+{% extends "base.html" %}
+{% block content %}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #f5f7fb;
+}
+
+h1 {
+    text-align: center;
+    margin: 20px;
+}
+
+/* Cards */
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    padding: 20px;
+}
+
+.card {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0px 3px 8px rgba(0,0,0,0.05);
+}
+
+.card h2 {
+    color: #2b6cb0;
+}
+
+/* Charts */
+.chart-container {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+}
+
+.chart-box {
+    flex: 1;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+/* TABLE (FIXED SPACING) */
+table {
+    width: 55%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background: white;
+}
+
+th {
+    background: #2b6cb0;
+    color: white;
+    padding: 8px;
+}
+
+td {
+    padding: 8px;
+    border-bottom: 1px solid #eee;
+}
+
+/* Alignment */
+td:nth-child(1) { text-align: center; }
+td:nth-child(2) { text-align: left; padding-left: 15px; }
+td:nth-child(3) { text-align: right; padding-right: 15px; }
+
+/* Rank colors */
+.rank-1 { background: #fff8dc; }  /* gold */
+.rank-2 { background: #f0f0f0; }  /* silver */
+.rank-3 { background: #fbe5d6; }  /* bronze */
+
+/* Progress bar */
+.progress {
+    background: #eee;
+    border-radius: 10px;
+    height: 8px;
+    margin-top: 5px;
+}
+
+.progress-bar {
+    height: 8px;
+    border-radius: 10px;
+    background: #4CAF50;
+}
+
+/* Hover */
+tr:hover {
+    background-color: #f1f5ff;
+}
+</style>
+
+<h1>📊 Teacher Report Dashboard</h1>
+
+<!-- ================= CARDS ================= -->
+<div class="card-container">
+    <div class="card"><h3>Total Students</h3><h2>{{ total_students }}</h2></div>
+    <div class="card"><h3>Active Students</h3><h2>{{ active_students }}</h2></div>
+    <div class="card"><h3>Total Points</h3><h2>{{ total_points }}</h2></div>
+    <div class="card"><h3>Activities</h3><h2>{{ total_activities }}</h2></div>
+</div>
+
+<!-- ================= CHARTS ================= -->
+<div class="chart-container">
+
+<div class="chart-box">
+    <h3>Performance Overview</h3>
+    <canvas id="barChart"></canvas>
+</div>
+
+<div class="chart-box">
+    <h3>Activity Distribution</h3>
+    <canvas id="pieChart"></canvas>
+</div>
+
+</div>
+
+<script>
+new Chart(document.getElementById('barChart'), {
+    type: 'bar',
+    data: {
+        labels: ['Quiz', 'Challenges'],
+        datasets: [{
+            data: [{{ total_quiz_attempts }}, {{ completed_challenges }}],
+            backgroundColor: ['#4CAF50', '#2196F3']
+        }]
+    }
+});
+
+new Chart(document.getElementById('pieChart'), {
+    type: 'pie',
+    data: {
+        labels: ['Trees', 'Others'],
+        datasets: [{
+            data: [{{ trees }}, {{ activities_done - trees }}],
+            backgroundColor: ['#4CAF50', '#FF9800']
+        }]
+    }
+});
+</script>
+
+<!-- ================= LEADERBOARD ================= -->
+<h2 style="text-align:center;">🏆 Top Students</h2>
+
+<table>
+<tr>
+    <th>Rank</th>
+    <th>Name</th>
+    <th>Points</th>
+</tr>
+
+{% for s in top_students %}
+<tr class="rank-{{ loop.index }}">
+    <td>
+        {% if loop.index == 1 %} 🥇
+        {% elif loop.index == 2 %} 🥈
+        {% elif loop.index == 3 %} 🥉
+        {% else %} {{ loop.index }}
+        {% endif %}
+    </td>
+
+    <td>
+        {{ s['name'] }}
+        <div class="progress">
+            <div class="progress-bar" style="width: {{ (s['points'] / 100) * 100 }}%"></div>
+        </div>
+    </td>
+
+    <td>{{ s['points'] }}</td>
+</tr>
+{% endfor %}
+</table>
+
+<!-- ================= WEAK STUDENTS ================= -->
+<h2 style="text-align:center;">⚠️ Weak Students</h2>
+
+<table>
+<tr>
+    <th>Name</th>
+    <th>Points</th>
+</tr>
+
+{% for s in weak_students %}
+<tr>
+    <td>{{ s['name'] }}</td>
+    <td>{{ s['points'] }}</td>
+</tr>
+{% endfor %}
+</table>
+
+{% endblock %}

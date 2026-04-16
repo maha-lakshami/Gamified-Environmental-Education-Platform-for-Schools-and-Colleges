@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div style="padding: 30px;">
+    <h2>User Profile</h2>
+
+    <div style="margin-top: 20px;">
+        <p><strong>Name:</strong> {{ session.username }}</p>
+        <p><strong>Email:</strong> example@gmail.com</p>
+    </div>
+
+    <div style="margin-top: 20px;">
+        <a href="/dashboard">⬅ Back to Dashboard</a>
+    </div>
+</div>
+
+{% endblock %}

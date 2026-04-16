@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+
+body {
+    background: #f4f6f9;
+}
+
+/* MAIN BOX */
+.result-box {
+    max-width: 900px;
+    margin: 60px auto;
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0px 6px 20px rgba(0,0,0,0.1);
+}
+
+/* TITLE */
+.result-title {
+    font-size: 28px;
+    color: green;
+    margin-bottom: 25px;
+}
+
+/* GRID */
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    margin-top: 20px;
+}
+
+/* EACH CARD */
+.image-card {
+    background: #fafafa;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0px 3px 10px rgba(0,0,0,0.05);
+}
+
+/* IMAGE */
+.image-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* TASK TEXT */
+.task-text {
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+</style>
+
+<div class="result-box">
+
+    <div class="result-title">
+        ✅ Challenge Submitted!
+    </div>
+
+    <h3>Your Uploaded Proof:</h3>
+
+    <div class="image-grid">
+
+        {% for img, task in data %}
+
+        <div class="image-card">
+
+            <img src="/static/uploads/{{ img }}">
+
+            <div class="task-text">
+                {{ task }}
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

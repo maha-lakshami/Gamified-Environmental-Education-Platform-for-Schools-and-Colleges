@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>EcoPlay Platform</title>
+    <style>
+
+body{
+    margin:0;
+    font-family: Arial, sans-serif;
+
+    /* ✅ FIXED BACKGROUND */
+    background: url("{{ url_for('static', filename='ecoplay_bg.jpg') }}") no-repeat center center fixed;
+    background-size: cover;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+/* ✅ REMOVE ANY EXTRA BACKGROUND COLORS */
+.login-container{
+    width:380px;
+    background:rgba(255,255,255,0.85);  /* transparent glass effect */
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.3);
+    text-align:center;
+    backdrop-filter: blur(5px); /* 🔥 makes it look modern */
+}
+
+.logo{
+    font-size:28px;
+    font-weight:bold;
+    color:#2e7d32;
+}
+
+.subtitle{
+    font-size:14px;
+    color:#555;
+    margin-bottom:20px;
+}
+
+.tabs{
+    display:flex;
+    margin-bottom:20px;
+    border:1px solid #ddd;
+    border-radius:8px;
+    overflow:hidden;
+}
+
+.tabs div{
+    flex:1;
+    padding:10px;
+    cursor:pointer;
+}
+
+.tabs .active{
+    background:#f5f5f5;
+    font-weight:bold;
+}
+
+input, select{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border:1px solid #ddd;
+    border-radius:6px;
+    font-size:14px;
+}
+
+.login-btn{
+    width:100%;
+    padding:12px;
+    background:#2ecc71;
+    color:white;
+    border:none;
+    border-radius:6px;
+    font-size:16px;
+    cursor:pointer;
+}
+
+.login-btn:hover{
+    background:#27ae60;
+}
+
+.error{
+    color:red;
+    font-size:14px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="login-container">
+
+```
+<div class="logo"> 🌱 EcoPlay Platform</div>
+<div class="subtitle">Gamified Environmental Education</div>
+
+<div class="tabs">
+    <div class="active">Sign In</div>
+    <div onclick="window.location.href='/signup'">Sign Up</div>
+</div>
+
+{% if error %}
+    <div class="error">{{ error }}</div>
+{% endif %}
+
+<form method="POST">
+
+    <input type="email" name="email" placeholder="Enter your email" required>
+
+    <input type="password" name="password" placeholder="Enter your password" required>
+
+    <!-- ✅ ADDED ROLE -->
+    <select name="role" required>
+        <option value="">Select Role</option>
+        <option value="student">Student</option>
+        <option value="teacher">Teacher</option>
+    </select>
+
+    <button class="login-btn">Sign In</button>
+
+</form>
+```
+
+</div>
+
+</body>
+</html>

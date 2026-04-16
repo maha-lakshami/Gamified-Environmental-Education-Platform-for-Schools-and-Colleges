@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>{{ category }} - {{ level }} Quiz</h2>
+
+<form method="POST" action="{{ url_for('submit_quiz') }}">
+
+{% for q in questions %}
+
+<div style="margin-bottom:20px;">
+
+<h3>{{ loop.index }}. {{ q.question }}</h3>
+
+<input type="hidden" id="correct{{ q.id }}" value="{{ q.correct_answer }}">
+
+<label>
+<input type="radio" name="{{ q.id }}" value="{{ q.option1 }}"
+onclick="checkAnswer(this, {{ q.id }})">
+{{ q.option1 }}
+</label><br>
+
+<label>
+<input type="radio" name="{{ q.id }}" value="{{ q.option2 }}"
+onclick="checkAnswer(this, {{ q.id }})">
+{{ q.option2 }}
+</label><br>
+
+<label>
+<input type="radio" name="{{ q.id }}" value="{{ q.option3 }}"
+onclick="checkAnswer(this, {{ q.id }})">
+{{ q.option3 }}
+</label><br>
+
+<label>
+<input type="radio" name="{{ q.id }}" value="{{ q.option4 }}"
+onclick="checkAnswer(this, {{ q.id }})">
+{{ q.option4 }}
+</label>
+
+<p id="result{{ q.id }}"></p>
+
+</div>
+
+{% endfor %}
+
+<div style="text-align:center; margin-top:20px;">
+
+<input type="hidden" name="category" value="{{ category }}">
+<input type="hidden" name="level" value="{{ level }}">
+
+<button type="submit" style="
+background-color:#28a745;
+color:white;
+padding:6px 16px;
+border:none;
+border-radius:4px;
+font-size:14px;
+cursor:pointer;
+">
+Submit
+</button>
+
+</div>
+
+</form>
+
+<script>
+function checkAnswer(radio, qid){
+
+    let correct = document.getElementById("correct" + qid).value.trim();
+    let result = document.getElementById("result" + qid);
+
+    // ✅ LOCK all options after click
+    let options = document.getElementsByName(qid);
+    options.forEach(opt => opt.disabled = true);
+
+    // ✅ Show result
+    if(radio.value.trim() === correct){
+        result.innerHTML = "✔ Correct";
+        result.style.color = "green";
+    } else {
+        result.innerHTML = "✘ Wrong. Correct answer: " + correct;
+        result.style.color = "red";
+    }
+}
+</script>
+
+<!-- ✅ RESULT DISPLAY -->
+{% if submitted %}
+<div style="text-align:center; margin-top:30px;">
+    <h2 style="color:blue;">🎉 Quiz Completed!</h2>
+    <h3>Your Score: {{ score }} / {{ questions|length }}</h3>
+
+    <a href="/dashboard">
+        <button style="
+        margin-top:10px;
+        background-color:#007bff;
+        color:white;
+        padding:8px 18px;
+        border:none;
+        border-radius:5px;
+        cursor:pointer;">
+        Back to Dashboard
+        </button>
+    </a>
+</div>
+{% endif %}
+
+{% endblock %}

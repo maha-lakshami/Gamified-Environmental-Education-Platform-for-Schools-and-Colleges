@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="form-wrapper">
+    <h2 class="form-title">Create New Challenge</h2>
+
+    <form method="POST" class="challenge-form">
+
+        <label>Title</label>
+        <input type="text" name="title" placeholder="Enter challenge title" required>
+
+        <label>Description</label>
+        <textarea name="description" rows="4" placeholder="Describe the challenge..." required></textarea>
+
+        <div class="form-row">
+            <div>
+                <label>Category</label>
+                <select name="category">
+                    <option>Water Conservation</option>
+                    <option>Waste Reduction</option>
+                    <option>Energy Saving</option>
+                    <option>Transportation</option>
+                    <option>Biodiversity</option>
+                    <option>Plastic-Free Living</option>
+                    <option>Sustainable Food & Nutrition</option>
+                    <option>Air Pollution Control</option>
+                    <option>Green Lifestyle Habits</option>
+                    <option>Recycling & Upcycling Activities</option>
+            </div>
+
+            <div>
+                <label>Points</label>
+                <input type="number" name="points" value="100">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div>
+                <label>Time Limit (minutes)</label>
+                <input type="number" name="time_limit" value="30">
+            </div>
+
+            <div>
+                <label>Difficulty</label>
+                <select name="difficulty">
+                    <option>Beginner</option>
+                    <option>Intermediate</option>
+                    <option>Advanced</option>
+                </select>
+            </div>
+        </div>
+
+        <label>Tasks (one per line)</label>
+<textarea name="tasks" placeholder="Enter tasks..."></textarea>
+
+        <div class="form-row">
+            <div>
+                <label>Start Date</label>
+                <input type="date" name="start_date">
+            </div>
+
+            <div>
+                <label>End Date</label>
+                <input type="date" name="end_date">
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <a href="/dashboard" class="cancel-btn">Cancel</a>
+            <button type="submit" class="submit-btn">Create Challenge</button>
+        </div>
+
+    </form>
+</div>
+
+{% endblock %}

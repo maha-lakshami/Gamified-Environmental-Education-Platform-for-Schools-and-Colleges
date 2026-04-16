@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2 class="section-title">👨‍🎓 Student Dashboard</h2>
+
+    <!-- ===== TOP CARDS ===== -->
+    <div class="top-cards">
+
+        <div class="card">
+            <div class="card-left">
+                <h3>📘 Activities</h3>
+                <p>View assigned activities</p>
+            </div>
+            <a href="/student_activities" class="btn green">View</a>
+        </div>
+
+        <div class="card">
+            <div class="card-left">
+                <h3>🏆 Challenges</h3>
+                <p>Complete challenges and earn points</p>
+            </div>
+            <a href="/challenges" class="btn blue">Start</a>
+        </div>
+
+        <div class="card">
+            <div class="card-left">
+                <h3>🧠 Quiz</h3>
+                <p>Test your knowledge</p>
+            </div>
+            <a href="/start_quiz" class="btn purple">Start</a>
+        </div>
+
+        <div class="card">
+            <div class="card-left">
+                <h3>📊 Leaderboard</h3>
+                <p>Check your rank</p>
+            </div>
+            <a href="/leaderboard" class="btn green">View</a>
+        </div>
+
+    </div>
+
+    <!-- ===== ACTIVITIES ===== -->
+    <h2 class="section-title">📘 Available Activities</h2>
+
+    {% for a in activities %}
+    <div class="activity">
+
+        <div class="activity-left">
+            <h3>{{ a.title }}</h3>
+            <p>{{ a.description }}</p>
+        </div>
+
+        <div class="activity-right">
+            <span class="points">🎯 {{ a.points }}</span>
+            <span class="date">📅 {{ a.start_date }} → {{ a.end_date }}</span>
+            <a href="/activity/{{ a.id }}" class="view-btn">View</a>
+        </div>
+
+    </div>
+    {% endfor %}
+
+    <!-- ===== CHALLENGES ===== -->
+    <h2 class="section-title">🏆 Available Challenges</h2>
+
+    {% for c in challenges %}
+    <div class="activity">
+
+        <div class="activity-left">
+            <h3>{{ c.title }}</h3>
+            <p>{{ c.description }}</p>
+        </div>
+
+        <div class="activity-right">
+            <span class="points">🎯 {{ c.points }}</span>
+            <a href="/start_challenge/{{ c.id }}" class="view-btn" style="background:#28a745;">
+                Start
+            </a>
+        </div>
+
+    </div>
+    {% endfor %}
+
+</div>
+
+</body>
+</html>

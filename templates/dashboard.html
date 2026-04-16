@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1 class="page-title">School Dashboard</h1>
+<p class="page-subtitle">
+    Monitor student engagement and environmental learning progress
+</p>
+
+<!-- ================= STATS ================= -->
+<div class="stats-grid">
+
+    <div class="stat-card yellow">
+        <div class="stat-header">
+            <span class="stat-icon">🎓</span>
+            <span>Total Students</span>
+        </div>
+        <h2>{{ total_students }}</h2>
+    </div>
+
+    <div class="stat-card green">
+        <div class="stat-header">
+            <span class="stat-icon">⚡</span>
+            <span>Active Participants</span>
+        </div>
+        <h2>{{ active_participants }}</h2>
+    </div>
+
+    <div class="stat-card blue">
+        <div class="stat-header">
+            <span class="stat-icon">🎯</span>
+            <span>Challenges Completed</span>
+        </div>
+        <h2>{{ challenges_completed }}</h2>
+    </div>
+
+    <div class="stat-card purple">
+        <div class="stat-header">
+            <span class="stat-icon">🏆</span>
+            <span>Total Points Earned</span>
+        </div>
+        <h2>{{ total_points }}</h2>
+    </div>
+
+</div>
+
+<!-- ================= MAIN GRID ================= -->
+<div class="main-grid">
+
+    <!-- LEFT PANEL -->
+    <div class="left-panel">
+
+        <!-- Categories -->
+        <div class="card">
+            <h3>Challenge Categories</h3>
+
+            <div class="category-list">
+                <a href="/challenge/water_conservation" class="category-item">💧 Water Conservation</a>
+                <a href="/challenge/waste_reduction" class="category-item">🗑 Waste Reduction</a>
+                <a href="/challenge/energy_saving" class="category-item">⚡ Energy Saving</a>
+                <a href="/challenge/transportation" class="category-item">🚲 Transportation</a>
+                <a href="/challenge/biodiversity" class="category-item">🌿 Biodiversity</a>
+                <a href="/challenge/plastic_free_living" class="category-item">🚫 Plastic-Free Living</a>
+                <a href="/challenge/sustainable_food" class="category-item">🍎 Sustainable Food</a>
+                <a href="/challenge/air_pollution" class="category-item">🌬 Air Pollution</a>
+                <a href="/challenge/green_lifestyle" class="category-item">🌱 Green Lifestyle</a>
+                <a href="/challenge/recycling" class="category-item">♻ Recycling</a>
+            </div>
+        </div>
+
+        <!-- Activity -->
+        <div class="activity">
+            📌 {{ total_students }} students registered
+        </div>
+
+    </div> <!-- ✅ LEFT PANEL CLOSED CORRECTLY -->
+
+    <!-- RIGHT PANEL -->
+    <div class="card">
+        <h3>Quick Actions</h3>
+
+        <div class="quick-actions">
+            <a href="/create-challenge" class="qa-btn qa-green">➕ Create New Challenge</a>
+            <a href="/create-quiz" class="qa-btn qa-purple">📝 Create New Quiz</a>
+            <a href="/reports" class="qa-btn qa-blue">📊 Generate Report</a>
+            <a href="/students" class="qa-btn qa-violet">👥 View All Students</a>
+            <a href="/export" class="qa-btn qa-outline">⬇ Export Data</a>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,16 @@
+<h2>Submissions</h2>
+
+{% for s in data %}
+
+<div>
+    <h3>{{ s.title }}</h3>
+
+    <img src="/static/uploads/{{ s.image }}" width="200">
+
+    <p>Status: {{ s.status }}</p>
+
+    <a href="/approve/{{ s.id }}">Approve</a>
+    <a href="/reject/{{ s.id }}">Reject</a>
+</div>
+
+{% endfor %}

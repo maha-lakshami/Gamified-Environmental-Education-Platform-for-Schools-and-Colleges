@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EcoPlay School Platform</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+
+    <!-- LEFT -->
+    <div class="logo-section">
+        <div class="logo">🌱 EcoPlay</div>
+        <div class="subtitle">School Platform</div>
+    </div>
+
+    <!-- CENTER -->
+    <div class="menu">
+        <a href="/dashboard">Dashboard</a>
+        <a href="{{ url_for('manage_activities') }}">Manage Activities</a>
+        <a href="/verify">Student Verification</a>
+        <a href="{{ url_for('leaderboard') }}">Leaderboard</a>
+        <a href="/challenges">Challenges</a>
+        <a href="{{ url_for('create_quiz') }}">Create Quiz</a>
+        <a href="/reports">Reports</a>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="user-menu">
+        <span onclick="toggleMenu()" class="user-name">
+            {{ session.username }} ▼
+        </span>
+
+        <div id="dropdownMenu" class="dropdown-content">
+            <a href="/profile">Profile</a>
+            <a href="/add-account">Add another account</a>
+            <a href="/logout">Logout</a>
+        </div>
+    </div>
+
+</div>
+
+<!-- PAGE CONTENT -->
+<div class="main-wrapper">
+    {% block content %}{% endblock %}
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- ✅ THIS IS WHAT YOU MISSED -->
+<script>
+function toggleMenu() {
+    let menu = document.getElementById("dropdownMenu");
+    if (menu.style.display === "block") {
+        menu.style.display = "none";
+    } else {
+        menu.style.display = "block";
+    }
+}
+
+// close dropdown when clicking outside
+window.onclick = function(event) {
+    if (!event.target.matches('.user-name')) {
+        let dropdown = document.getElementById("dropdownMenu");
+        if (dropdown && dropdown.style.display === "block") {
+            dropdown.style.display = "none";
+        }
+    }
+}
+</script>
+
+</body>
+</html>
